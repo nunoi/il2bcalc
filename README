@@ -1,0 +1,11 @@
+IL2 Bombsight Calculator
+
+This web page allows you to automate wind calculations in IL2 bombsight.
+
+You must provide the plane's heading, the wind's heading and speed and 
+it will calculate the wind angle relative to the plane flight path. 
+Speed is just for show since it is not altered, but why not.
+
+It uses jQuery-Knob implementation by Anthony Terrien.
+
+Its license is reproduced in LICENSE.knob file as well as HTML page.
