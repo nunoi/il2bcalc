@@ -30,6 +30,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
         <script src="dist/jquery.knob.min.js"></script>
         <script>
+			var selector = 1;
+			
             $(function($) {
                 $(".knob").knob({
                     change : function (value) {
@@ -67,13 +69,23 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                         // "tron" case
                     }
                 });
-				$('#arrow.arrow-back').on( "click", function() {
-					alert(1);
+				$('#arrow.arrow-back').on( "click", function(event) {
+					selector_change(0);
 				});
-				$('#arrow.arrow-forward').on( "click", function() {
-					alert(2);
+				$('#arrow.arrow-forward').on( "click", function(event) {
+					selector_change(1);
 				});
             });
+			
+			$(window).resize(function() {
+				if ($(window).innerWidth() >= 800-17) {
+					$("#planeknob").show();
+					$("#windknob").show();
+					$("#speedknob").show();
+				} else {
+					selector_draw();
+				}
+			});
 						
 			function calculate_heading(ph, wh) {
 				temp = wh - ph;
@@ -85,6 +97,39 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 					relh = 360 + temp;
 				}
 				return relh;
+			}
+			
+			function selector_change(option) {
+				if (option == 0) {
+					selector--;
+					if (selector <= 0) {
+						selector = 3;
+					}
+				} 
+				else if (option == 1) {
+					selector++;
+					if (selector >= 4) {
+						selector = 1;
+					}
+				}
+				selector_draw();
+			}
+			
+			function selector_draw() {
+				$("#planeknob").hide();
+				$("#windknob").hide();
+				$("#speedknob").hide();
+				switch(selector) {
+					case 1:
+						$("#planeknob").show();
+						break;
+					case 2:
+						$("#windknob").show();
+						break;
+					case 3:
+						$("#speedknob").show();
+						break;
+				}
 			}
         </script>
         <style>
@@ -163,6 +208,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			@media screen and (min-width: 800px) {
 				#arrow{
 					display: none;
+				}
+				#planeknob{
+					display: inline;
+				}
+				#windknob{
+					display: inline;
+				}
+				#speedknob{
+					display: inline;
 				}
 			}
         </style>
