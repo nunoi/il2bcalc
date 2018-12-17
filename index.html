@@ -142,9 +142,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				}
 			}
 
-			if (window.location.hostname === "spiff.ddns.net") {
-				document.getElementById("spiff-site").style.display = "inline";
-			}
+			$(function() {
+				//stuff here will wait for the DOM to load
+				if (window.location.hostname === "spiff.ddns.net") {
+					document.getElementById("spiff-site").style.display = "inline";
+				}
+			});
         </script>
         <style>
 			html {
